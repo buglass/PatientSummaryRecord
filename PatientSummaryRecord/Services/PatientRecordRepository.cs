@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using PatientSummaryRecord.Models;
 
 namespace PatientSummaryRecord.Services
@@ -49,7 +50,7 @@ namespace PatientSummaryRecord.Services
 					DateOfBirth = new System.DateTime(1917, 08, 01),
 					GPPractice = "Lossiemouth"
 				},
-			};
+			}.Where(patient => patient.Id == id);
 		}
 	}
 }
