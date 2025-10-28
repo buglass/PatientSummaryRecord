@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using PatientSummaryRecord.Models;
 using PatientSummaryRecord.Services;
 
 namespace PatientSummaryRecord.Controllers
@@ -18,9 +16,9 @@ namespace PatientSummaryRecord.Controllers
 		}
 
 		[HttpGet("{id}")]
-		public IEnumerable<PatientDto> Get(int id)
+		public IActionResult Get(int id)
 		{
-			throw new NotImplementedException();
+			return new OkObjectResult(_patientRecordRepository.SelectById(id).Single());
 		}
 	}
 }
