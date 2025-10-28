@@ -6,7 +6,7 @@ using PatientSummaryRecord.Services;
 
 namespace PatientSummaryRecord.Controllers
 {
-	[Route("Patients")]
+	[Route("patients")]
 	[ApiController]
 	public class PatientRecordController
 	{
