@@ -24,8 +24,6 @@ namespace PatientSummaryRecord.Controllers
 			IEnumerable<PatientDto> patients = _patientRecordRepository.SelectById(id);
 			if (!patients.Any())
 				return new NotFoundResult();
-			else if (patients.SingleOrDefault() == null)
-				throw new InvalidOperationException();
 			else
 				return new OkObjectResult(patients.Single());
 		}
