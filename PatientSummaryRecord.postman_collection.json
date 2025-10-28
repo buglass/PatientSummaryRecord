@@ -18,16 +18,16 @@
 							"});\r",
 							"\r",
 							"pm.test(\"Response has expected ID\", function () {\r",
-							"    pm.expect(pm.response.json().Id).to.eql(1);\r",
+							"    pm.expect(pm.response.json().id).to.eql(1);\r",
 							"});\r",
 							"\r",
 							"pm.test(\"Response matches schema\", function () {\r",
 							"    var schema = {\r",
-							"        \"Id\": \"integer\",\r",
-							"        \"NHSNumber\": \"string\",\r",
-							"        \"Name\": \"string\",\r",
-							"        \"DateOfBirth\": \"string\",\r",
-							"        \"GPPractice\": \"string\",\r",
+							"        \"id\": \"integer\",\r",
+							"        \"nhsNumber\": \"string\",\r",
+							"        \"name\": \"string\",\r",
+							"        \"dateOfBirth\": \"string\",\r",
+							"        \"gpPractice\": \"string\",\r",
 							"    };\r",
 							"\r",
 							"    pm.test('Schema is valid', function () {\r",
@@ -37,7 +37,8 @@
 							""
 						],
 						"type": "text/javascript",
-						"packages": {}
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
@@ -45,12 +46,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/patients/1",
-					"protocol": "http",
+					"raw": "https://localhost:44304/patients/1",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "5000",
+					"port": "44304",
 					"path": [
 						"patients",
 						"1"
@@ -72,7 +73,8 @@
 							""
 						],
 						"type": "text/javascript",
-						"packages": {}
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
@@ -80,12 +82,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/patients/0",
-					"protocol": "http",
+					"raw": "https://localhost:44304/patients/0",
+					"protocol": "https",
 					"host": [
 						"localhost"
 					],
-					"port": "5000",
+					"port": "44304",
 					"path": [
 						"patients",
 						"0"
