@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using PatientSummaryRecord.Models;
@@ -22,10 +21,9 @@ namespace PatientSummaryRecord.Controllers
 		public IActionResult Get(int id)
 		{
 			IEnumerable<PatientDto> patients = _patientRecordRepository.SelectById(id);
-			if (!patients.Any())
-				return new NotFoundResult();
-			else
-				return new OkObjectResult(patients.Single());
+			return patients.Any()
+				? new OkObjectResult(patients.Single())
+				: (ActionResult)new NotFoundResult();
 		}
 	}
 }
