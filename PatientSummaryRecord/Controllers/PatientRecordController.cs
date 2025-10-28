@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using PatientSummaryRecord.Services;
 
@@ -18,7 +19,11 @@ namespace PatientSummaryRecord.Controllers
 		[HttpGet("{id}")]
 		public IActionResult Get(int id)
 		{
-			return new OkObjectResult(_patientRecordRepository.SelectById(id).Single());
+			try {
+				return new OkObjectResult(_patientRecordRepository.SelectById(id).Single());
+			} catch (ArgumentNullException) {
+				return new NotFoundResult();
+			}
 		}
 	}
 }
