@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using PatientSummaryRecord.Models;
 
@@ -15,7 +16,7 @@ namespace PatientSummaryRecord.Services
 					Id = 1,
 					NHSNumber = "1234",
 					Name = "Mr. Buggington",
-					DateOfBirth = new System.DateTime(2020, 01, 31),
+					DateOfBirth = new DateTime(2020, 01, 31),
 					GPPractice = "North Bank"
 				},
 				new PatientDto
@@ -23,7 +24,7 @@ namespace PatientSummaryRecord.Services
 					Id = 2,
 					NHSNumber = "88888888",
 					Name = "Mrs. Bugsworth",
-					DateOfBirth = new System.DateTime(1920, 01, 31),
+					DateOfBirth = new DateTime(1920, 01, 31),
 					GPPractice = "South Bank"
 				},
 				new PatientDto
@@ -31,7 +32,7 @@ namespace PatientSummaryRecord.Services
 					Id = 3,
 					NHSNumber = "98432",
 					Name = "Duggee",
-					DateOfBirth = new System.DateTime(1982, 08, 02),
+					DateOfBirth = new DateTime(1982, 08, 02),
 					GPPractice = "Squirrel Club"
 				},
 				new PatientDto
@@ -39,7 +40,7 @@ namespace PatientSummaryRecord.Services
 					Id = 4,
 					NHSNumber = "53",
 					Name = "Roly",
-					DateOfBirth = new System.DateTime(1990, 07, 29),
+					DateOfBirth = new DateTime(1990, 07, 29),
 					GPPractice = "POTATO!"
 				},
 				new PatientDto
@@ -47,7 +48,7 @@ namespace PatientSummaryRecord.Services
 					Id = 5,
 					NHSNumber = "111",
 					Name = "Treble One",
-					DateOfBirth = new System.DateTime(1917, 08, 01),
+					DateOfBirth = new DateTime(1917, 08, 01),
 					GPPractice = "Lossiemouth"
 				},
 			}.Where(patient => patient.Id == id);
