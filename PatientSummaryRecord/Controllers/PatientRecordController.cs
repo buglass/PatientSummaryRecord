@@ -20,10 +20,15 @@ namespace PatientSummaryRecord.Controllers
 		[HttpGet("{id}")]
 		public IActionResult Get(int id)
 		{
-			IEnumerable<PatientDto> patients = _patientRecordRepository.SelectById(id);
-			return patients.Any()
-				? new OkObjectResult(patients.Single())
-				: (ActionResult)new NotFoundResult();
+			try
+			{
+				IEnumerable<PatientDto> patients = _patientRecordRepository.SelectById(id);
+				return patients.Any()
+					? new OkObjectResult(patients.Single())
+					: (ActionResult)new NotFoundResult();
+			} catch {
+				return new StatusCodeResult(500);
+			}
 		}
 	}
 }
