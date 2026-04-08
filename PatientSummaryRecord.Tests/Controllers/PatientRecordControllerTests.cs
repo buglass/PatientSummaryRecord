@@ -53,9 +53,10 @@ namespace PatientSummaryRecord.Tests.Controllers
 		}
 
 		[Fact]
-		public void MultiplePatientsThrowsException()
+		public void MultiplePatientsReturns500()
 		{
 			const int patientId = 1;
+			const int expectedStatusCode = 500;
 
 			var repository = new Mock<IPatientRecordRepository>();
 			repository.Setup(r => r.SelectById(patientId)).Returns(
@@ -80,9 +81,11 @@ namespace PatientSummaryRecord.Tests.Controllers
 				}
 			);
 
-			Assert.Throws<InvalidOperationException>(() =>
-				new PatientRecordController(repository.Object).Get(patientId)
-			);
+			var actual = new PatientRecordController(repository.Object).Get(patientId);
+
+			Assert.IsType<StatusCodeResult>(actual);
+			var statusCodeResult = (StatusCodeResult)actual;
+			Assert.Equal(expectedStatusCode, statusCodeResult.StatusCode);
 		}
 	}
 }
