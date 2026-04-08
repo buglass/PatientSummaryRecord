@@ -3,6 +3,7 @@ using Moq;
 using PatientSummaryRecord.Controllers;
 using PatientSummaryRecord.Models;
 using PatientSummaryRecord.Services;
+using System;
 using System.Linq;
 using Xunit;
 using Microsoft.Extensions.Logging;
@@ -21,7 +22,7 @@ namespace PatientSummaryRecord.Tests.Controllers
 				Id = patientId,
 				NHSNumber = "12345678",
 				Name = "mock",
-				DateOfBirth = new System.DateTime(2020, 01, 31),
+				DateOfBirth = new DateTime(2020, 01, 31),
 				GPPractice = "North Bank"
 			};
 
@@ -75,7 +76,7 @@ namespace PatientSummaryRecord.Tests.Controllers
 						Id = patientId,
 						NHSNumber = "12341234",
 						Name = "patient one",
-						DateOfBirth = new System.DateTime(2020, 01, 31),
+						DateOfBirth = new DateTime(2020, 01, 31),
 						GPPractice = "North Bank"
 					},
 					new PatientDto
@@ -83,7 +84,7 @@ namespace PatientSummaryRecord.Tests.Controllers
 						Id = patientId,
 						NHSNumber = "88888888",
 						Name = "patient two",
-						DateOfBirth = new System.DateTime(1920, 01, 31),
+						DateOfBirth = new DateTime(1920, 01, 31),
 						GPPractice = "South Bank"
 					},
 				}
