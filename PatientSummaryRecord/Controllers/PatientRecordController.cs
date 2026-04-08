@@ -13,11 +13,11 @@ namespace PatientSummaryRecord.Controllers
 	public class PatientRecordController
 	{
 		private readonly IPatientRecordRepository _patientRecordRepository;
-		private readonly ILogger _logger;
+		private readonly ILogger<PatientRecordController> _logger;
 
 		public PatientRecordController(
 			IPatientRecordRepository patientRecordRepository,
-			ILogger logger
+			ILogger<PatientRecordController> logger
 		) {
 			_patientRecordRepository = patientRecordRepository;
 			_logger = logger;
