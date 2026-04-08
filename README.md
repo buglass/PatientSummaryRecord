@@ -33,8 +33,6 @@ notable omissions which could be considered for any future development.
 - There is no attempt to validate the DTO when retrieving it from the
 repository.
 
-- There is no logging within the controller.
-
 - There is no range checking on the patient ID within the controller GET
 method.
 

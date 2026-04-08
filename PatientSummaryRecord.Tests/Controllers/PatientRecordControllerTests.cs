@@ -4,8 +4,8 @@ using PatientSummaryRecord.Controllers;
 using PatientSummaryRecord.Models;
 using PatientSummaryRecord.Services;
 using System.Linq;
-using System;
 using Xunit;
+using Microsoft.Extensions.Logging;
 
 namespace PatientSummaryRecord.Tests.Controllers
 {
@@ -28,7 +28,11 @@ namespace PatientSummaryRecord.Tests.Controllers
 			var repository = new Mock<IPatientRecordRepository>();
 			repository.Setup(r => r.SelectById(patientId)).Returns(new[] { expectedData });
 
-			var actual = new PatientRecordController(repository.Object).Get(patientId);
+			var actual = new PatientRecordController(
+				repository.Object,
+				new Mock<ILogger<PatientRecordController>>().Object
+			)
+			.Get(patientId);
 
 			Assert.IsType<OkObjectResult>(actual);
 			var okResult = (OkObjectResult)actual;
@@ -45,7 +49,11 @@ namespace PatientSummaryRecord.Tests.Controllers
 			var repository = new Mock<IPatientRecordRepository>();
 			repository.Setup(r => r.SelectById(patientId)).Returns(Enumerable.Empty<PatientDto>);
 
-			var actual = new PatientRecordController(repository.Object).Get(patientId);
+			var actual = new PatientRecordController(
+				repository.Object,
+				new Mock<ILogger<PatientRecordController>>().Object
+			)
+			.Get(patientId);
 
 			Assert.IsType<NotFoundResult>(actual);
 			var notFoundResult = (NotFoundResult)actual;
@@ -81,7 +89,10 @@ namespace PatientSummaryRecord.Tests.Controllers
 				}
 			);
 
-			var actual = new PatientRecordController(repository.Object).Get(patientId);
+			var actual = new PatientRecordController(
+				repository.Object,
+				new Mock<ILogger<PatientRecordController>>().Object
+			).Get(patientId);
 
 			Assert.IsType<StatusCodeResult>(actual);
 			var statusCodeResult = (StatusCodeResult)actual;

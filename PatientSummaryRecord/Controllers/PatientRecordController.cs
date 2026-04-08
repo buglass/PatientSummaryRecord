@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using PatientSummaryRecord.Models;
 using PatientSummaryRecord.Services;
 
@@ -11,10 +13,14 @@ namespace PatientSummaryRecord.Controllers
 	public class PatientRecordController
 	{
 		private readonly IPatientRecordRepository _patientRecordRepository;
+		private readonly ILogger _logger;
 
-		public PatientRecordController(IPatientRecordRepository patientRecordRepository)
-		{
+		public PatientRecordController(
+			IPatientRecordRepository patientRecordRepository,
+			ILogger logger
+		) {
 			_patientRecordRepository = patientRecordRepository;
+			_logger = logger;
 		}
 
 		[HttpGet("{id}")]
@@ -26,7 +32,8 @@ namespace PatientSummaryRecord.Controllers
 				return patients.Any()
 					? new OkObjectResult(patients.Single())
 					: (ActionResult)new NotFoundResult();
-			} catch {
+			} catch (Exception ex) {
+				_logger.LogError($"Could not get patient ID {id}: {ex.Message}");
 				return new StatusCodeResult(500);
 			}
 		}
