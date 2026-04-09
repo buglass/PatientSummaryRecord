@@ -33,9 +33,4 @@ notable omissions which could be considered for any future development.
 - There is no attempt to validate the DTO when retrieving it from the
 repository.
 
-- There is no range checking on the patient ID within the controller GET
-method.
-
-- There is no API documentation.
-
 - The .NET version is deprecated.
