@@ -4,7 +4,6 @@ using PatientSummaryRecord.Controllers;
 using PatientSummaryRecord.Models;
 using PatientSummaryRecord.Services;
 using System;
-using System.Linq;
 using Xunit;
 using Microsoft.Extensions.Logging;
 
@@ -27,7 +26,8 @@ namespace PatientSummaryRecord.Tests.Controllers
 			};
 
 			var repository = new Mock<IPatientRecordRepository>();
-			repository.Setup(r => r.SelectById(patientId)).Returns(new[] { expectedData });
+			repository.Setup(r => r.PatientRecordExists(patientId)).Returns(true);
+			repository.Setup(r => r.GetPatientRecord(patientId)).Returns(expectedData);
 
 			var actual = new PatientRecordController(
 				repository.Object,
@@ -48,7 +48,7 @@ namespace PatientSummaryRecord.Tests.Controllers
 			const int expectedStatusCode = 404;
 
 			var repository = new Mock<IPatientRecordRepository>();
-			repository.Setup(r => r.SelectById(patientId)).Returns(Enumerable.Empty<PatientDto>);
+			repository.Setup(r => r.PatientRecordExists(patientId)).Returns(false);
 
 			var actual = new PatientRecordController(
 				repository.Object,
@@ -62,33 +62,14 @@ namespace PatientSummaryRecord.Tests.Controllers
 		}
 
 		[Fact]
-		public void MultiplePatientsReturns500()
+		public void AnyErrorReturns500()
 		{
 			const int patientId = 1;
 			const int expectedStatusCode = 500;
 
 			var repository = new Mock<IPatientRecordRepository>();
-			repository.Setup(r => r.SelectById(patientId)).Returns(
-				new[]
-				{
-					new PatientDto
-					{
-						Id = patientId,
-						NHSNumber = "12341234",
-						Name = "patient one",
-						DateOfBirth = new DateTime(2020, 01, 31),
-						GPPractice = "North Bank"
-					},
-					new PatientDto
-					{
-						Id = patientId,
-						NHSNumber = "88888888",
-						Name = "patient two",
-						DateOfBirth = new DateTime(1920, 01, 31),
-						GPPractice = "South Bank"
-					},
-				}
-			);
+			repository.Setup(r => r.PatientRecordExists(patientId)).Returns(true);
+			repository.Setup(r => r.GetPatientRecord(patientId)).Throws(new Exception());
 
 			var actual = new PatientRecordController(
 				repository.Object,
